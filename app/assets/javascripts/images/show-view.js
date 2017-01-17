@@ -5,6 +5,7 @@ IMG.view = (function($){
 
   var $image;
   var $container;
+  var $characterSelect;
   var callbacks;
 
   var init = function(callbax){
@@ -24,11 +25,11 @@ IMG.view = (function($){
   };
 
   var renderTagWithSelect = function(tag){
-    renderTag(tag);
-    //TODO
+    _renderTag(tag);
+    _appendSelect(tag);
   };
 
-  var renderTag = function(tag) {
+  var _renderTag = function(tag) {
     var relativeCoords = _calculateRelativeCoords(tag);
     var $tagBox = $("<div>")
       .addClass("img-tag-container")
@@ -50,6 +51,20 @@ IMG.view = (function($){
   var removeTag = function(tag) {
     var $tag = $(".img-tag#" + tag.id);
     $tag.parent().remove();
+  };
+
+  var getCharacterName = function(e) {
+    var $target = $(e.target);
+    console.log($target);
+  };
+
+  var getTagID = function(e) {
+
+  };
+
+  var _appendSelect = function(tag) {
+    var $tagBox = $(".img-tag#" + tag.id).parent();
+    $tagBox.append($characterSelect);
   };
 
   var _calculateRelativeCoords = function(tag) {
@@ -89,18 +104,22 @@ IMG.view = (function($){
 
   var _registerListeners = function() {
     $image.on("click", callbacks.createTag);
+    $characterSelect.on("change", callbacks.persistTag);
   };
 
   var _getDomElements = function() {
     $container = $('.main-img-container');
     $image = $(".main-img");
+    $characterSelect = $("#character-select");
   };
 
   return {
     init: init,
     getPercentileMouseCoords: getPercentileMouseCoords,
-    renderTag: renderTag,
+    renderTagWithSelect: renderTagWithSelect,
     removeTag: removeTag,
+    getCharacterName: getCharacterName,
+    getTagID: getTagID,
   };
 
 }($));

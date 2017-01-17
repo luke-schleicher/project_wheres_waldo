@@ -39,11 +39,16 @@ IMG.model = (function(){
     return false;
   };
 
+  var persistTag = function(name, tagId) {
+    console.log(name, tagId);
+  };
+
   return {
     createTag: createTag,
     unnamedTag: unnamedTag,
     destroyUnnamedTag: destroyUnnamedTag,
     taggingInProgress: taggingInProgress,
+    persistTag: persistTag,
   };
 
 }());
