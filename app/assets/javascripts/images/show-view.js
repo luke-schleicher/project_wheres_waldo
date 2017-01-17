@@ -48,9 +48,7 @@ IMG.view = (function($){
 
   var removeTag = function(tag) {
     var $tag = $(".img-tag#" + tag.id);
-    if ($tag.hasClass("active")){
-      $tag.remove();
-    }
+    $tag.parent().remove();
   };
 
   var _calculateRelativeCoords = function(tag) {
