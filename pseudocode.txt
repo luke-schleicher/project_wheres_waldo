@@ -1,0 +1,17 @@
+HTML
+======
+Container with an image inside of it
+
+CSS
+======
+Change cursor appearance on hover over image
+
+JS
+======
+Module pattern
+IMAGE namespace
+MVC pattern
+Tag Constructor
+Waldo people stored in front end model
+
+
