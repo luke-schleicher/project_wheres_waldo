@@ -9,6 +9,7 @@ IMG.controller = (function(model, view){
     }
     var coords = view.getPercentileMouseCoords(e);
     var tag = model.createTag(coords);
+    //view.renderTagWithSelect(tag);
     view.renderTag(tag);
   };
 

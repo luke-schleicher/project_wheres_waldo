@@ -22,21 +22,32 @@ IMG.view = (function($){
     //TODO
   };
 
+  var renderTagWithSelect = function(tag){
+    renderTag(tag);
+    //TODO
+  };
+
   var renderTag = function(tag) {
     var relativeCoords = _calculateRelativeCoords(tag);
     var $tagBox = $("<div>")
+      .addClass("img-tag-container")
+      .css({
+        "top": relativeCoords.y,
+        "left": relativeCoords.x,
+      });
+    var $tag = $("<div>")
       .addClass("img-tag")
       .attr("id", tag.id)
-      .css({"top": relativeCoords.y,
-            "left": relativeCoords.x,
-            "width": tag.width + "px",
-            "height": tag.height + "px"});
+      .css({
+        "width": tag.width + "px",
+        "height": tag.height + "px"
+      });
+    $tagBox.append($tag);
     $container.append($tagBox);
   };
 
   var removeTag = function(tag) {
     var $tag = $(".img-tag#" + tag.id);
-//console.log();
     if ($tag.hasClass("active")){
       $tag.remove();
     }
