@@ -1,7 +1,7 @@
 
 Rails.application.routes.draw do
 
-  root 'images#index'
+  root 'images#show'
   resources :images, only: [:show]
 
 end
