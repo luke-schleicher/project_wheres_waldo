@@ -12,8 +12,8 @@ class TagsController < ApplicationController
 
   def tag_params
     params.require(:tag).permit(:name,
-                                :percentileX,
-                                :percentileY,
+                                :percentile_x,
+                                :percentile_y,
                                 :height,
                                 :width)
   end

@@ -45,7 +45,7 @@ IMG.model = (function(){
     $.ajax({
       url: "/tags",
       method: "POST",
-      data: { tag: tag },
+      data: _railsifyTagData(tag),
       dataType: "json"
     });
     _activeTag = null;
@@ -57,6 +57,12 @@ IMG.model = (function(){
 
   var _getTagById = function(id){
     return tags[id];
+  };
+
+  var _railsifyTagData = function(tag){
+    tag.percentile_x = tag.percentileX;
+    tag.percentile_y = tag.percentileY;
+    return { tag: tag };
   };
 
   return {
