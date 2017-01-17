@@ -63,9 +63,14 @@ IMG.view = (function($){
   };
 
   var _appendSelect = function(tag) {
+    _resetCharacterSelect();
     var $tagBox = $(".img-tag#" + tag.id).parent();
     $tagBox.append($characterSelect);
   };
+
+  var _resetCharacterSelect = function() {
+    $characterSelect.val("");    
+  }
 
   var _calculateRelativeCoords = function(tag) {
     var x = tag.percentileX * _getImageWidth() - (tag.width / 4);

@@ -25,9 +25,7 @@ IMG.model = (function(){
   };
 
   var unnamedTag = function(){
-    if (_activeTag.name === "") {
-      return _activeTag;
-    }
+    return _activeTag;
   };
 
   var destroyUnnamedTag = function(tag){
@@ -50,7 +48,12 @@ IMG.model = (function(){
       //data: tag,
       //dataType: "json"
     //});
+    _activeTag = null;
   };
+
+  var getTags = function() {
+    return Object.values(tags);
+  }
 
   var _getTagById = function(id){
     return tags[id];
@@ -62,7 +65,7 @@ IMG.model = (function(){
     destroyUnnamedTag: destroyUnnamedTag,
     taggingInProgress: taggingInProgress,
     persistTag: persistTag,
-    tags: tags
+    getTags: getTags,
   };
 
 }());
