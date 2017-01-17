@@ -124,6 +124,11 @@ IMG.view = (function($){
   var _registerListeners = function() {
     $image.on("click", callbacks.createTag);
     $characterSelect.on("change", callbacks.persistTag);
+    $image.on("mouseenter", _showTags;
+  };
+
+  var _showTags = function() {
+
   };
 
   var _getDomElements = function() {
