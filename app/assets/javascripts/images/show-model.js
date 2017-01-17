@@ -3,7 +3,8 @@ var IMG = IMG || {};
 
 IMG.model = (function(){
 
-  var tags = [];
+  var tags = {};
+  var _activeTag;
   var id = 1;
 
   var Tag = function Tag(coords) {
@@ -18,31 +19,41 @@ IMG.model = (function(){
 
   var createTag = function(coords) {
     var tag = new Tag(coords);
-    tags.push(tag);
+    _activeTag = tag;
+    tags[tag.id] = tag;
     return tag;
   };
 
   var unnamedTag = function(){
-    return tags[(tags.length - 1)];
+    if (_activeTag.name === "") {
+      return _activeTag;
+    }
   };
 
   var destroyUnnamedTag = function(tag){
-    var index = tags.indexOf(tag);
-    tags.splice(index, 1);
+    delete tags[tag.id];
   };
 
   var taggingInProgress = function() {
-    var lastTag = tags[(tags.length - 1)];
-    if (lastTag) {
-      return lastTag.name === '';
+    if (_activeTag) {
+      return _activeTag.name === '';
     }
     return false;
   };
 
   var persistTag = function(name, tagId) {
-    $.ajax({
+    var tag = _getTagById(tagId);
+    tag.name = name;
+    //$.ajax({
+      //url: ,
+      //method: "POST",
+      //data: tag,
+      //dataType: "json"
+    //});
+  };
 
-    });
+  var _getTagById = function(id){
+    return tags[id];
   };
 
   return {
@@ -51,6 +62,7 @@ IMG.model = (function(){
     destroyUnnamedTag: destroyUnnamedTag,
     taggingInProgress: taggingInProgress,
     persistTag: persistTag,
+    tags: tags
   };
 
 }());
