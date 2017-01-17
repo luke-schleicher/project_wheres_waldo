@@ -1,5 +1,5 @@
-var IMG = IMG || {};
 
+var IMG = IMG || {};
 
 IMG.controller = (function(model, view){
 
