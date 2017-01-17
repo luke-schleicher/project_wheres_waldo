@@ -42,13 +42,12 @@ IMG.model = (function(){
   var persistTag = function(name, tagId) {
     var tag = _getTagById(tagId);
     tag.name = name;
-    $.ajax({
+    return $.ajax({
       url: "/tags",
       method: "POST",
       data: _railsifyTagData(tag),
       dataType: "json"
-    });
-    _activeTag = null;
+    }).then(_clearActiveTag);
   };
 
   var getTags = function() {
@@ -63,6 +62,12 @@ IMG.model = (function(){
     tag.percentile_x = tag.percentileX;
     tag.percentile_y = tag.percentileY;
     return { tag: tag };
+  };
+
+  var _clearActiveTag = function(){
+    var lastActiveTag = _activeTag;
+    _activeTag = null;
+    return lastActiveTag;
   };
 
   return {

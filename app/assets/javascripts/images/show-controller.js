@@ -21,7 +21,8 @@ IMG.controller = (function(model, view){
   var persistTag = function(e) {
     var name = view.getCharacterName(e);
     var tagId = view.getTagId(e);
-    model.persistTag(name, tagId);
+    model.persistTag(name, tagId)
+      .then(view.beautifyTag);
   };
 
   var callbacks = {

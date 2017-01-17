@@ -14,6 +14,15 @@ IMG.view = (function($){
     _registerListeners();
   };
 
+  var beautifyTag = function(tag){
+    var $tagBox = $(".img-tag#" + tag.id).parent();
+    var $tagName = $("<div>")
+                    .text(tag.name)
+                    .addClass("tag-name");
+    $tagBox.append($tagName);
+    // TODO: hide select
+  };
+
   var getPercentileMouseCoords = function(e) {
     var absoluteX = e.pageX;
     var absoluteY = e.pageY;
@@ -69,7 +78,7 @@ IMG.view = (function($){
   };
 
   var _resetCharacterSelect = function() {
-    $characterSelect.val("");    
+    $characterSelect.val("");
   }
 
   var _calculateRelativeCoords = function(tag) {
@@ -120,11 +129,12 @@ IMG.view = (function($){
 
   return {
     init: init,
+    beautifyTag: beautifyTag,
+    getCharacterName: getCharacterName,
     getPercentileMouseCoords: getPercentileMouseCoords,
+    getTagId: getTagId,
     renderTagWithSelect: renderTagWithSelect,
     removeTag: removeTag,
-    getCharacterName: getCharacterName,
-    getTagId: getTagId,
   };
 
 }($));
