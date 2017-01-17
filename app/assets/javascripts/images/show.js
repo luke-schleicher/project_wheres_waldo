@@ -1,15 +1,13 @@
 
 var IMG = {};
 
-
-
 IMG.model = (function(){
 
   var tags = [];
 
   var Tag = function Tag(coords) {
-    this.x = coords.x;
-    this.y = coords.y;
+    this.percentileX = coords.x;
+    this.percentileY = coords.y;
     this.name = "";
   };
 
@@ -24,8 +22,6 @@ IMG.model = (function(){
 
 }());
 
-
-
 IMG.view = (function($){
 
   var $image;
@@ -36,11 +32,36 @@ IMG.view = (function($){
     _initImageListener();
   };
 
-  var getMouseCoords = function(e) {
+  var getPercentileMouseCoords = function(e) {
+    var absoluteX = e.pageX;
+    var absoluteY = e.pageY;
+    return _calculatePercentileCoords(absoluteX, absoluteY);
+  };
+
+  var _calculatePercentileCoords = function(absoluteX, absoluteY){
+    var offset = _imageOriginCoords();
+    var percentileX = (absoluteX - offset.x) / _getImageWidth();
+    var percentileY = (absoluteY - offset.y) / _getImageHeight();
     return {
-      x: e.pageX,
-      y: e.pageY,
+      x: percentileX,
+      y: percentileY,
     };
+  };
+
+  var _imageOriginCoords = function(){
+    var offset = $image.offset();
+    return {
+      x: offset.left,
+      y: offset.top,
+    };
+  };
+
+  var _getImageWidth = function(){
+    return $image.width();
+  };
+
+  var _getImageHeight = function(){
+    return $image.height();
   };
 
   var _initImageListener = function() {
@@ -50,22 +71,20 @@ IMG.view = (function($){
 
   return {
     init: init,
-    getMouseCoords: getMouseCoords,
+    getPercentileMouseCoords: getPercentileMouseCoords
   };
 
 }($));
 
-
-
 IMG.controller = (function(model, view){
 
-  var callbacks = {
-    createTag: createTag;
+  var createTag = function(e) {
+    var coords = view.getPercentileMouseCoords(e);
+    model.createTag(coords);
   };
 
-  var createTag = function(e) {
-    var coords = view.getMouseCoords(e);
-    model.createTag(coords);
+  var callbacks = {
+    createTag: createTag
   };
 
   var init = function(){
