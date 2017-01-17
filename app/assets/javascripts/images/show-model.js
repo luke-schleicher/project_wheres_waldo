@@ -40,7 +40,9 @@ IMG.model = (function(){
   };
 
   var persistTag = function(name, tagId) {
-    console.log(name, tagId);
+    $.ajax({
+
+    });
   };
 
   return {

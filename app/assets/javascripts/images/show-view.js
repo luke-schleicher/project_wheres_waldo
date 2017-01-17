@@ -53,13 +53,13 @@ IMG.view = (function($){
     $tag.parent().remove();
   };
 
-  var getCharacterName = function(e) {
-    var $target = $(e.target);
-    console.log($target);
+  var getCharacterName = function() {
+    return $characterSelect.val();
   };
 
-  var getTagID = function(e) {
-
+  var getTagId = function(e) {
+    var $tag = $(e.target).siblings(".img-tag");
+    return parseInt($tag.attr("id"));
   };
 
   var _appendSelect = function(tag) {
@@ -119,7 +119,7 @@ IMG.view = (function($){
     renderTagWithSelect: renderTagWithSelect,
     removeTag: removeTag,
     getCharacterName: getCharacterName,
-    getTagID: getTagID,
+    getTagId: getTagId,
   };
 
 }($));

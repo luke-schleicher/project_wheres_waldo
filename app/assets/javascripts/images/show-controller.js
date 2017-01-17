@@ -10,7 +10,6 @@ IMG.controller = (function(model, view){
     var coords = view.getPercentileMouseCoords(e);
     var tag = model.createTag(coords);
     view.renderTagWithSelect(tag);
-    console.log("create tag");
   };
 
   var clearUnnamedTag = function() {
@@ -21,9 +20,8 @@ IMG.controller = (function(model, view){
 
   var persistTag = function(e) {
     var name = view.getCharacterName(e);
-    var tagID = view.getTagId(e);
+    var tagId = view.getTagId(e);
     model.persistTag(name, tagId);
-    console.log("persist");
   };
 
   var callbacks = {
