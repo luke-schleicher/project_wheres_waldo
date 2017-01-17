@@ -9,16 +9,19 @@ IMG.controller = (function(model, view){
     view.renderTag(tag);
   };
 
-  var clearUnnamedTags = function(e) {
-    var unnamedTags = model.unnamedTags();
-    model.destroyUnnamedTags();
-    view.clearAllTags();
-    view.removeTags(unnamedTags);
+  var clearUnnamedTag = function(e) {
+    console.log(model.taggingInProgress());
+    if (model.taggingInProgress()) {
+
+      var unnamedTag = model.unnamedTag();
+      model.destroyUnnamedTag(unnamedTag);
+      view.removeTag(unnamedTag);
+    }
   };
 
   var callbacks = {
     createTag: createTag,
-    clearUnnamedTags: clearUnnamedTags
+    clearUnnamedTag: clearUnnamedTag,
   };
 
   var init = function(){

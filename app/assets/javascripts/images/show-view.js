@@ -18,10 +18,6 @@ IMG.view = (function($){
     return _calculatePercentileCoords(absoluteX, absoluteY);
   };
 
-  view clearAllTags = function(){
-    //TODO
-  };
-
   var renderTags = function(tags){
     //TODO
   };
@@ -30,11 +26,17 @@ IMG.view = (function($){
     var relativeCoords = _calculateRelativeCoords(tag);
     var $tagBox = $("<div>")
       .addClass("img-tag")
-      .css({'top': relativeCoords.y,
-            'left': relativeCoords.x,
-            'width': tag.width + 'px',
-            'height': tag.height + 'px'});
+      .attr("id", tag.id)
+      .css({"top": relativeCoords.y,
+            "left": relativeCoords.x,
+            "width": tag.width + "px",
+            "height": tag.height + "px"});
     $container.append($tagBox);
+  };
+
+  var removeTag = function(tag) {
+    console.log(tag);
+    $(".img-tag#" + tag.id).remove();
   };
 
   var _calculateRelativeCoords = function(tag) {
@@ -74,7 +76,7 @@ IMG.view = (function($){
 
   var _registerListeners = function() {
     $image.on("click", callbacks.createTag);
-    $image.on("click", callbacks.clearUnnamedTags);
+    $image.on("click", callbacks.clearUnnamedTag);
   };
 
   var _getDomElements = function() {
@@ -86,6 +88,7 @@ IMG.view = (function($){
     init: init,
     getPercentileMouseCoords: getPercentileMouseCoords,
     renderTag: renderTag,
+    removeTag: removeTag,
   };
 
 }($));

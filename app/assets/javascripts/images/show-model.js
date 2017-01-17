@@ -3,11 +3,14 @@ var IMG = IMG || {};
 IMG.model = (function(){
 
   var tags = [];
+  var id = 1;
 
   var Tag = function Tag(coords) {
     this.percentileX = coords.x;
     this.percentileY = coords.y;
+    this.id = id;
     this.name = "";
+    id++;
   };
   Tag.prototype.height = 100;
   Tag.prototype.width = 50;
@@ -18,28 +21,29 @@ IMG.model = (function(){
     return tag;
   };
 
-  var unnamedTags = function(){
-    return tags.filter(function(tag){
-      return tag.name === "";
-    });
+  var unnamedTag = function(){
+    return tags[-1];
   };
 
-  var destroyUnnamedTags = function(){
-    var unnamedTags = unnamedTags();
-    destroyTags(unnamedTags);
+  var destroyUnnamedTag = function(tag){
+    var index = tags.indexOf(tag);
+    tags.splice(index, 1);
   };
 
-  var destroyTags = function(doomedTags){
-    doomedTags.forEach(function(tag){
-      index = tags.indexOf(tag);
-      tags.splice(index, 1);
-    });
+  var taggingInProgress = function() {
+    var lastTag = tags[-1];
+    console.log(lastTag);
+    if (lastTag) {
+      return lastTag.name === '';
+    }
+    return false;
   };
 
   return {
     createTag: createTag,
-    unnamedTags: unnamedTags,
-    destroyUnnamedTags: destroyUnnamedTags
+    unnamedTag: unnamedTag,
+    destroyUnnamedTag: destroyUnnamedTag,
+    taggingInProgress: taggingInProgress,
   };
 
 }());
