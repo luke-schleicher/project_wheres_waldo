@@ -10,6 +10,9 @@ IMG.model = (function(){
     this.name = "";
   };
 
+  Tag.prototype.height = 100;
+  Tag.prototype.width = 50;
+
   var createTag = function(coords) {
     var tag = new Tag(coords);
     tags.push(tag);

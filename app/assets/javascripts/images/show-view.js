@@ -22,13 +22,15 @@ IMG.view = (function($){
     var relativeCoords = _calculateRelativeCoords(tag);
     var $tagBox = $("<div>")
       .addClass("img-tag")
-      .css({ 'top': relativeCoords.y, 'left': relativeCoords.x });
-
+      .css({'top': relativeCoords.y,
+            'left': relativeCoords.x,
+            'width': tag.width + 'px',
+            'height': tag.height + 'px'});
     $container.append($tagBox);
   };
 
   var _calculateRelativeCoords = function(tag) {
-    var x = tag.percentileX * _getImageWidth();
+    var x = tag.percentileX * _getImageWidth() - (tag.width / 4);
     var y = tag.percentileY * _getImageHeight();
     return {
       x: x,
