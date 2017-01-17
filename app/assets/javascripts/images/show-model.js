@@ -34,7 +34,7 @@ IMG.model = (function(){
 
   var taggingInProgress = function() {
     if (_activeTag) {
-      return _activeTag.name === '';
+      return _activeTag.name === "";
     }
     return false;
   };
@@ -42,12 +42,12 @@ IMG.model = (function(){
   var persistTag = function(name, tagId) {
     var tag = _getTagById(tagId);
     tag.name = name;
-    //$.ajax({
-      //url: ,
-      //method: "POST",
-      //data: tag,
-      //dataType: "json"
-    //});
+    $.ajax({
+      url: "/tags",
+      method: "POST",
+      data: { tag: tag },
+      dataType: "json"
+    });
     _activeTag = null;
   };
 
