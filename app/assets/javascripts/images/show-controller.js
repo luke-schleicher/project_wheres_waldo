@@ -9,8 +9,16 @@ IMG.controller = (function(model, view){
     view.renderTag(tag);
   };
 
+  var clearUnnamedTags = function(e) {
+    var unnamedTags = model.unnamedTags();
+    model.destroyUnnamedTags();
+    view.clearAllTags();
+    view.removeTags(unnamedTags);
+  };
+
   var callbacks = {
-    createTag: createTag
+    createTag: createTag,
+    clearUnnamedTags: clearUnnamedTags
   };
 
   var init = function(){

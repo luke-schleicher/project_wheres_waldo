@@ -9,7 +9,6 @@ IMG.model = (function(){
     this.percentileY = coords.y;
     this.name = "";
   };
-
   Tag.prototype.height = 100;
   Tag.prototype.width = 50;
 
@@ -19,8 +18,28 @@ IMG.model = (function(){
     return tag;
   };
 
+  var unnamedTags = function(){
+    return tags.filter(function(tag){
+      return tag.name === "";
+    });
+  };
+
+  var destroyUnnamedTags = function(){
+    var unnamedTags = unnamedTags();
+    destroyTags(unnamedTags);
+  };
+
+  var destroyTags = function(doomedTags){
+    doomedTags.forEach(function(tag){
+      index = tags.indexOf(tag);
+      tags.splice(index, 1);
+    });
+  };
+
   return {
     createTag: createTag,
+    unnamedTags: unnamedTags,
+    destroyUnnamedTags: destroyUnnamedTags
   };
 
 }());

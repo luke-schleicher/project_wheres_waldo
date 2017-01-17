@@ -9,13 +9,21 @@ IMG.view = (function($){
   var init = function(callbax){
     callbacks = callbax;
     _getDomElements();
-    _initImageListener();
+    _registerListeners();
   };
 
   var getPercentileMouseCoords = function(e) {
     var absoluteX = e.pageX;
     var absoluteY = e.pageY;
     return _calculatePercentileCoords(absoluteX, absoluteY);
+  };
+
+  view clearAllTags = function(){
+    //TODO
+  };
+
+  var renderTags = function(tags){
+    //TODO
   };
 
   var renderTag = function(tag) {
@@ -64,8 +72,9 @@ IMG.view = (function($){
     return $image.height();
   };
 
-  var _initImageListener = function() {
+  var _registerListeners = function() {
     $image.on("click", callbacks.createTag);
+    $image.on("click", callbacks.clearUnnamedTags);
   };
 
   var _getDomElements = function() {
