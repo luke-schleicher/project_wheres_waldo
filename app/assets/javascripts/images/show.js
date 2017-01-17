@@ -9,13 +9,27 @@ IMG.model = (function(){
 
 IMG.view = (function($){
 
-  return {};
+  var $image;
+
+  var init = function(){
+    $image = $(".main-img");
+  };
+
+  return {
+    init: init
+  };
 
 }($));
 
 IMG.controller = (function(model, view){
 
-  return {};
+  var init = function(){
+    view.init();
+  };
+
+  return {
+    init: init
+  };
 
 }(IMG.model, IMG.view));
 
