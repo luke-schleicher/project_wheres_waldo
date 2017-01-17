@@ -16,4 +16,4 @@ Waldo people stored in front end model
 
 
 
-HOW DO WE DEAL WITH THE SCREEN RESIZING ISSUE?
+

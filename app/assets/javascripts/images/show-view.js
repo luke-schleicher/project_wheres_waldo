@@ -1,34 +1,14 @@
-
-var IMG = {};
-
-IMG.model = (function(){
-
-  var tags = [];
-
-  var Tag = function Tag(coords) {
-    this.percentileX = coords.x;
-    this.percentileY = coords.y;
-    this.name = "";
-  };
-
-  var createTag = function(coords) {
-    var tag = new Tag(coords);
-    tags.push(tag);
-  };
-
-  return {
-    createTag: createTag,
-  };
-
-}());
+var IMG = IMG || {};
 
 IMG.view = (function($){
 
   var $image;
+  var $container;
   var callbacks;
 
   var init = function(callbax){
     callbacks = callbax;
+    _getDomElements();
     _initImageListener();
   };
 
@@ -36,6 +16,24 @@ IMG.view = (function($){
     var absoluteX = e.pageX;
     var absoluteY = e.pageY;
     return _calculatePercentileCoords(absoluteX, absoluteY);
+  };
+
+  var renderTag = function(tag) {
+    var relativeCoords = _calculateRelativeCoords(tag);
+    var $tagBox = $("<div>")
+      .addClass("img-tag")
+      .css({ 'top': relativeCoords.y, 'left': relativeCoords.x });
+
+    $container.append($tagBox);
+  };
+
+  var _calculateRelativeCoords = function(tag) {
+    var x = tag.percentileX * _getImageWidth();
+    var y = tag.percentileY * _getImageHeight();
+    return {
+      x: x,
+      y: y,
+    }
   };
 
   var _calculatePercentileCoords = function(absoluteX, absoluteY){
@@ -65,42 +63,18 @@ IMG.view = (function($){
   };
 
   var _initImageListener = function() {
-    $image = $(".main-img");
     $image.on("click", callbacks.createTag);
+  };
+
+  var _getDomElements = function() {
+    $container = $('.main-img-container');
+    $image = $(".main-img");
   };
 
   return {
     init: init,
-    getPercentileMouseCoords: getPercentileMouseCoords
+    getPercentileMouseCoords: getPercentileMouseCoords,
+    renderTag: renderTag,
   };
 
 }($));
-
-IMG.controller = (function(model, view){
-
-  var createTag = function(e) {
-    var coords = view.getPercentileMouseCoords(e);
-    model.createTag(coords);
-  };
-
-  var callbacks = {
-    createTag: createTag
-  };
-
-  var init = function(){
-    view.init(callbacks);
-  };
-
-  return {
-    init: init
-  };
-
-}(IMG.model, IMG.view));
-
-
-
-$(document).ready(function(){
-  if ($("body").data("controller-action") === "images-show"){
-    IMG.controller.init();
-  }
-});
