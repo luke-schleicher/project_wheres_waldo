@@ -22,7 +22,7 @@ IMG.model = (function(){
   };
 
   var unnamedTag = function(){
-    return tags[-1];
+    return tags[(tags.length - 1)];
   };
 
   var destroyUnnamedTag = function(tag){
@@ -31,8 +31,7 @@ IMG.model = (function(){
   };
 
   var taggingInProgress = function() {
-    var lastTag = tags[-1];
-    console.log(lastTag);
+    var lastTag = tags[(tags.length - 1)];
     if (lastTag) {
       return lastTag.name === '';
     }

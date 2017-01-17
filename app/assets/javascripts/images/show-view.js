@@ -35,8 +35,11 @@ IMG.view = (function($){
   };
 
   var removeTag = function(tag) {
-    console.log(tag);
-    $(".img-tag#" + tag.id).remove();
+    var $tag = $(".img-tag#" + tag.id);
+//console.log();
+    if ($tag.hasClass("active")){
+      $tag.remove();
+    }
   };
 
   var _calculateRelativeCoords = function(tag) {
@@ -76,7 +79,6 @@ IMG.view = (function($){
 
   var _registerListeners = function() {
     $image.on("click", callbacks.createTag);
-    $image.on("click", callbacks.clearUnnamedTag);
   };
 
   var _getDomElements = function() {
