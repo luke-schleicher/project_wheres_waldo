@@ -16,4 +16,4 @@ Waldo people stored in front end model
 
 
 
-
+when clicking another location without selecting a character, program is unable to persist new tags after that

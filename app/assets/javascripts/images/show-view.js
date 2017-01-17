@@ -15,12 +15,12 @@ IMG.view = (function($){
   };
 
   var beautifyTag = function(tag){
+
     var $tagBox = $(".img-tag#" + tag.id).parent();
     var $tagName = $("<div>")
                     .text(tag.name)
                     .addClass("tag-name");
     $tagBox.append($tagName);
-    // TODO: hide select
   };
 
   var getPercentileMouseCoords = function(e) {
@@ -71,10 +71,15 @@ IMG.view = (function($){
     return parseInt($tag.attr("id"));
   };
 
+  var hideCharacterSelect = function() {
+    $characterSelect.hide();
+  };
+
   var _appendSelect = function(tag) {
     _resetCharacterSelect();
     var $tagBox = $(".img-tag#" + tag.id).parent();
     $tagBox.append($characterSelect);
+    $characterSelect.show();
   };
 
   var _resetCharacterSelect = function() {
@@ -135,6 +140,7 @@ IMG.view = (function($){
     getTagId: getTagId,
     renderTagWithSelect: renderTagWithSelect,
     removeTag: removeTag,
+    hideCharacterSelect: hideCharacterSelect,
   };
 
 }($));
